@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "pnpm clean && tsc --project tsconfig.build.json",
-    "examples": "tsx --tsconfig ./tsconfig.build.json examples/invoice.ts",
+    "gen:example": "tsx --tsconfig ./tsconfig.build.json",
     "clean": "rimraf dist",
     "dev": "tsc --watch --project tsconfig.build.json",
     "test": "echo \"Error: no test specified\" && exit 1",
