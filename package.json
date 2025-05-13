@@ -1,0 +1,50 @@
+{
+  "name": "@ryusaka/pdf-renderer",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "pnpm clean && tsc --project tsconfig.build.json",
+    "examples": "tsx --tsconfig ./tsconfig.build.json examples/invoice.ts",
+    "clean": "rimraf dist",
+    "dev": "tsc --watch --project tsconfig.build.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "biome check --write --unsafe"
+  },
+  "private": true,
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.8.1",
+  "dependencies": {
+    "@sparticuz/chromium": "^133.0.0",
+    "pagedjs": "0.4.3",
+    "puppeteer": "24.8.2",
+    "puppeteer-core": "24.8.2",
+    "rimraf": "^6.0.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.15.17",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
