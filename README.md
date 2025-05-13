@@ -29,8 +29,9 @@ pnpm install
   index.ts
   htmlToPdf.ts
   htmlToPreviewHtml.ts
-/public
-  paged.polyfill.js
+/examples
+  invoice.ts
+  xxx.ts
 ```
 
 ---
@@ -42,4 +43,12 @@ import { htmlToPdf, htmlToPreviewHtml } from 'puppeteer-pagedjs';
 
 const previewHtml = htmlToPreviewHtml('<html>...</html>');
 const pdfBuffer = await htmlToPdf('<html>...</html>');
+```
+
+## サンプルPDF生成
+
+サンプルPDFの生成
+
+```
+pnpm gen:example examples/invoice.ts
 ```
