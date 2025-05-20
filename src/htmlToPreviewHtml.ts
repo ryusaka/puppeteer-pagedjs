@@ -1,5 +1,5 @@
 import type { Page } from 'puppeteer-core'
-import { scriptPath } from 'src/pagedjs'
+import { scriptPath } from './pagedjs'
 import { getBrowser } from './puppeteerSingleton'
 
 declare global {
@@ -9,6 +9,7 @@ declare global {
     }
   }
 }
+
 /**
  * Paged.jsでページ分割済みの状態までPuppeteerで待つ共通関数
  */
@@ -26,25 +27,34 @@ export async function pagedjsRenderPage(
   })
   await page.addScriptTag({ path: pagedJsPath })
 
-  // フォント指定
+  // フォント設定
   await page.addStyleTag({
     content: `
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-    }
-    `,
+      body {
+        font-family: 'Noto Sans', 'Noto Sans JP';
+      }
+      @font-face {
+        font-family: "Noto Sans JP";
+        font-weight: normal;
+        src: local("Noto Sans JP Regular"), local("Noto Sans JP");
+      }
+      @font-face {
+        font-family: "Noto Sans JP";
+        font-weight: bold;
+        src: local("Noto Sans JP Bold"), local("Noto Sans JP");
+      }
+      @page {
+        size: A4 portrait;
+        margin: 10mm 10mm 10mm 10mm;
+        @bottom-center {
+          content: counter(page) " / " counter(pages);
+        }
+      }
+      `,
   })
   // ページ設定
   await page.addStyleTag({
     content: `
-    @page {
-      size: A4 portrait;
-      margin: 10mm 10mm 10mm 10mm;
-      @bottom-center {
-        content: counter(page) " / " counter(pages);
-      }
-    }
-
     table {
     }
 

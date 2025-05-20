@@ -1,0 +1,14 @@
+volumes:
+  server-volume:
+    driver: local
+
+services:
+  server:
+    build: .
+    platform: linux/amd64
+    volumes:
+      - server-volume:/app
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "3000:3000"

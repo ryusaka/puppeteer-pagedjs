@@ -1,6 +1,7 @@
 import type { PDFOptions } from 'puppeteer'
 import { pagedjsRenderPage } from './htmlToPreviewHtml'
 import { scriptPath } from './pagedjs'
+
 export interface HtmlToPdfOptions {
   pagedJsPath?: string
   pdf?: PDFOptions // PuppeteerのPDFオプション

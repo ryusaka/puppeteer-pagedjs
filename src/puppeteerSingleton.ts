@@ -4,25 +4,30 @@ import puppeteer, { type Browser } from 'puppeteer-core'
 let browserSingleton: Browser | null = null
 
 export async function getBrowser(): Promise<Browser> {
-  const shouldUseCore = process.env.NODE_ENV === 'production'
   if (!browserSingleton) {
-    browserSingleton = await puppeteer.launch(
-      shouldUseCore
-        ? {
-            headless: true,
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath(),
+    const isLocal = !process.env.NODE_ENV
+    const headlessType = process.env.IS_LOCAL ? false : 'shell'
+    const viewport = {
+      deviceScaleFactor: 1,
+      hasTouch: false,
+      height: 1080,
+      isLandscape: true,
+      isMobile: false,
+      width: 1920,
+    }
+    browserSingleton = await puppeteer.launch({
+      headless: true,
+      args: isLocal
+        ? puppeteer.defaultArgs()
+        : puppeteer.defaultArgs({
             args: chromium.args,
-          }
-        : {
-            headless: true,
-            defaultViewport: chromium.defaultViewport,
-            args: chromium.args,
-            executablePath: await import('puppeteer').then(m =>
-              m.executablePath()
-            ),
-          }
-    )
+            headless: headlessType,
+          }),
+      executablePath: isLocal
+        ? await import('puppeteer').then(m => m.executablePath())
+        : await chromium.executablePath(),
+      defaultViewport: viewport,
+    })
     // プロセス終了時にクリーンアップ
     const cleanup = async () => {
       if (browserSingleton) {
