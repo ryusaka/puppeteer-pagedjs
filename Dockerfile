@@ -35,7 +35,18 @@ COPY --from=builder /app/node_modules /app/node_modules
 COPY --from=builder /app/dist /app/dist
 COPY --from=builder /app/package.json /app/package.json
 
-COPY ./fonts /usr/share/fonts/truetype/noto
+RUN mkdir -p /usr/share/fonts/truetype/noto
+
+# Download Noto Sans JP fonts
+RUN curl -L https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFLgk75vY0rw-oME.ttf -o /usr/share/fonts/truetype/noto/NotoSansJP-Black.ttf
+RUN curl -L https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFJEk75vY0rw-oME.ttf -o /usr/share/fonts/truetype/noto/NotoSansJP-ExtraBold.ttf
+RUN curl -L https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFPYk75vY0rw-oME.ttf -o /usr/share/fonts/truetype/noto/NotoSansJP-Bold.ttf
+RUN curl -L https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFM8k75vY0rw-oME.ttf -o /usr/share/fonts/truetype/noto/NotoSansJP-SemiBold.ttf
+RUN curl -L https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFCMj75vY0rw-oME.ttf -o /usr/share/fonts/truetype/noto/NotoSansJP-Medium.ttf
+RUN curl -L https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFBEj75vY0rw-oME.ttf -o /usr/share/fonts/truetype/noto/NotoSansJP-Regular.ttf
+RUN curl -L https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFE8j75vY0rw-oME.ttf -o /usr/share/fonts/truetype/noto/NotoSansJP-Light.ttf
+RUN curl -L https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFJEj75vY0rw-oME.ttf -o /usr/share/fonts/truetype/noto/NotoSansJP-ExtraLight.ttf
+RUN curl -L https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFBEi75vY0rw-oME.ttf -o /usr/share/fonts/truetype/noto/NotoSansJP-Thin.ttf
 
 EXPOSE 3000
 
